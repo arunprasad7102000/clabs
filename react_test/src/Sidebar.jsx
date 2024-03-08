@@ -19,7 +19,6 @@ const Sidebar = () => {
       document.getElementById("sidebar").style.display = "none";
     } else if (buttonTitle === "Save the Segment") {
       console.log("Segment Name:", segmentName);
-      setSegmentName("");
     }
   };
 
@@ -37,7 +36,10 @@ const Sidebar = () => {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((responseData) => console.log("Data saved:", responseData))
+      .then((responseData) => {
+        console.log("Data saved:", responseData);
+        setSegmentName("");
+      })
       .catch((error) => console.error("Error saving data:", error));
   };
 
