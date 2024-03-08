@@ -1,0 +1,45 @@
+.dropdown-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .fa-circle-icon {
+    color: grey;
+    font-family: 'Lato, sans-serif';
+    font-size: 10px;
+    margin-right: 4px;
+  }
+  
+  .button-delete {
+    background-color: #F2FBF9;
+    color: #657A93;
+    padding: 0px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 32px;
+  }
+  
+  .dropdown-select {
+    font-family: 'Lato, sans-serif';
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    width: 260px;
+    margin: 5px;
+  }
+  
+  .add-schema-link {
+    font-family: 'Lato, sans-serif';
+    color: #46B697;
+    font-size: 12px;
+    display: flex;
+    margin-left: 36px;
+  }
+  
+  .add-schema-link-disabled {
+    color: #ccc;
+  }
+  

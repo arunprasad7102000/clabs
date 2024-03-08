@@ -1,0 +1,19 @@
+.button {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin-top: 50px;
+    margin-right: 10px;
+  }
+  
+  .button-save {
+    background-color: #41B494;
+    color: white;
+  }
+  
+  .button-cancel {
+    background-color: white;
+    color: red;
+  }
