@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaCircle } from "react-icons/fa";
-import "./Dropdown.css";
 
 const Dropdown = ({ segmentName, setSegmentName }) => {
   const [dropdowns, setDropdowns] = useState([
@@ -10,6 +9,16 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
       isNewSegment: true,
     },
   ]);
+
+  const buttonStyle = {
+    backgroundColor: "#F2FBF9",
+    color: "#657A93",
+    padding: "0px 15px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "32px",
+  };
 
   const options = [
     { value: "firstName", label: "First Name" },
@@ -32,9 +41,7 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
       segment_name: segmentName,
       schema: dropdowns
         .filter((dropdown) => dropdown.selectedOption)
-        .map((dropdown) => ({
-          [dropdown.selectedOption]: dropdown.selectedOption,
-        })),
+        .map((dropdown) => ({ [dropdown.selectedOption]: dropdown.selectedOption })),
     };
     fetch("https://webhook.site/87c86c18-c999-4682-b606-32c5c9e8d3c9", {
       method: "POST",
@@ -57,16 +64,25 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
     setDropdowns((prevDropdowns) => [...prevDropdowns, newDropdown]);
   };
 
-  const isAddButtonDisabled = dropdowns.some(
-    (dropdown) => !dropdown.selectedOption
-  );
+  const isAddButtonDisabled = dropdowns.some((dropdown) => !dropdown.selectedOption);
 
   return (
     <div>
       <div style={{ maxHeight: "250px", overflowY: "auto" }}>
         {dropdowns.map((dropdown) => (
-          <div key={dropdown.id} className="dropdown-container">
-            <FaCircle className="fa-circle-icon" />
+          <div
+            key={dropdown.id}
+            className="dropdown-container"
+            style={{ alignItems: "center", display: "flex", justifyContent: "center" }}
+          >
+            <FaCircle
+              style={{
+                color: dropdown.isAccountName ? "red" : dropdown.isNewSegment ? "grey" : "green",
+                fontFamily: "Lato, sans-serif",
+                fontSize: "10px",
+                marginRight: "4px",
+              }}
+            />
             <div className="facircle-icon"></div>
             <select
               value={dropdown.selectedOption}
@@ -74,22 +90,23 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
                 setDropdowns((prevDropdowns) =>
                   prevDropdowns.map((d) => {
                     if (d.id === dropdown.id) {
-                      const updatedDropdown = {
-                        ...d,
-                        selectedOption: e.target.value,
-                      };
+                      const updatedDropdown = { ...d, selectedOption: e.target.value };
                       const isAccountName = e.target.value === "accountName";
-                      return {
-                        ...updatedDropdown,
-                        isAccountName,
-                        isNewSegment: false,
-                      };
+                      return { ...updatedDropdown, isAccountName, isNewSegment: false };
                     }
                     return d;
                   })
                 )
               }
-              className="dropdown-select"
+              style={{
+                fontFamily: "Lato, sans-serif",
+                fontSize: "14px",
+                border: "1px solid #ddd",
+                borderRadius: "5px",
+                padding: "8px",
+                width: "260px",
+                margin: "5px",
+              }}
             >
               <option value="" disabled>
                 Add schema to segment
@@ -97,11 +114,7 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
               {options
                 .filter(
                   (option) =>
-                    !dropdowns.some(
-                      (d) =>
-                        d.selectedOption === option.value &&
-                        d.id !== dropdown.id
-                    )
+                    !dropdowns.some((d) => d.selectedOption === option.value && d.id !== dropdown.id)
                 )
                 .map((option) => (
                   <option key={option.value} value={option.value}>
@@ -109,10 +122,7 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
                   </option>
                 ))}
             </select>
-            <button
-              onClick={() => handleDeleteDropdown(dropdown.id)}
-              className="button-delete"
-            >
+            <button onClick={() => handleDeleteDropdown(dropdown.id)} style={buttonStyle}>
               -{" "}
             </button>
           </div>
@@ -120,12 +130,14 @@ const Dropdown = ({ segmentName, setSegmentName }) => {
       </div>
       <a
         href="#"
-        className={`add-schema-link ${
-          isAddButtonDisabled ? "add-schema-link-disabled" : ""
-        }`}
-        onClick={() =>
-          isAddButtonDisabled ? null : (handleAddDropdown(), sendDataToServer())
-        }
+        style={{
+          fontFamily: "Lato, sans-serif",
+          color: isAddButtonDisabled ? "#ccc" : "#46B697",
+          fontSize: "12px",
+          display: "flex",
+          marginLeft: "36px",
+        }}
+        onClick={() => (isAddButtonDisabled ? null : (handleAddDropdown(), sendDataToServer()))}
         disabled={isAddButtonDisabled}
       >
         + Add new schema
