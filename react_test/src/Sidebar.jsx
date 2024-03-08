@@ -19,6 +19,8 @@ const Sidebar = () => {
       document.getElementById("sidebar").style.display = "none";
     } else if (buttonTitle === "Save the Segment") {
       console.log("Segment Name:", segmentName);
+      // Clear the text box by resetting the state
+      setSegmentName("");
     }
   };
 
@@ -54,7 +56,7 @@ const Sidebar = () => {
         color: "white",
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
       }}
-      >
+    >
       <div style={{ display: "flex", alignItems: "center", padding: "10px" }}>
         <span style={{ marginRight: "10px" }}>&lt;</span>
         <p>Saving Segment</p>
